@@ -9,7 +9,14 @@ MKDIR	= mkdir -p
 RM		= rm -rf
 
 # Compiler
-CC		= cc
+ifeq ($(UNAME_S),Linux)
+	CC = gcc
+endif
+
+ifeq ($(UNAME_S),Darwin)
+	CC = clang
+endif
+
 CFLAGS	= -c
 AR		= ar
 
