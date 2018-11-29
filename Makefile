@@ -1,7 +1,8 @@
 # Directories
-BUILD_DIR=build
-OBJ_DIR=$(BUILD_DIR)/obj
-LIB_DIR=$(BUILD_DIR)/lib
+SRC_DIR 	= src
+BUILD_DIR 	= build
+OBJ_DIR		= $(BUILD_DIR)/obj
+LIB_DIR		= $(BUILD_DIR)/lib
 
 # Commands
 MKDIR	= mkdir -p
@@ -12,17 +13,21 @@ CC		= cc
 CFLAGS	= -c
 AR		= ar
 
+# Files
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
 all: build
 
 build: lib
 
-lib: hello-world-c
+lib: $(OBJ)
 	@$(MKDIR) $(LIB_DIR)
 	$(AR) rc $(LIB_DIR)/hello.a $(OBJ_DIR)/hello.o
 
-hello-world-c: hello.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@$(MKDIR) $(OBJ_DIR)
-	$(CC) $(CFLAGS) -o $(OBJ_DIR)/hello.o hello.c
+	$(CC) $(CFLAGS) -o $@ $<
 
 clean:
 	$(RM) $(BUILD_DIR)
