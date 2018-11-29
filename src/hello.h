@@ -1,6 +1,0 @@
-#ifndef HELLOWORLDSTATICLIBRARY_LIBRARY_H
-#define HELLOWORLDSTATICLIBRARY_LIBRARY_H
-
-void hello(void);
-
-#endif
